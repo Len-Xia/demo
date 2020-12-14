@@ -1,6 +1,8 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
+    <p>姓名：{{obj.nickname}}</p>
+    <p>出生年月：{{/\d{4}-\d{1,2}-\d{1,2}/g.exec(obj.mtime)}}</p>
   </div>
 </template>
 
@@ -9,7 +11,25 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'vue-demo'
+      msg: 'vue-demo',
+      obj:{}
+    }
+  },
+  mounted(){
+    this.credit()
+  },
+  methods:{
+    credit(){
+      var loginMode = 'msdk';//游戏内默认msdk(wx|qq|msdk)
+      var url = 'http://test.com/query_common_credit/';
+      this.$http.get(url)
+        .then(res => {
+          console.log(res)
+          this.obj = res.data.data;
+        })
+        .catch(err => {
+          
+        })
     }
   }
 }
