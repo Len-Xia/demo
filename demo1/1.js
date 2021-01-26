@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer');
-(async () => {
+(async () => {   
     const browser = await puppeteer.launch({ headless: false, timeout: 15000 });
     const page = await browser.newPage();
     await page.goto('https://baidu.com');
